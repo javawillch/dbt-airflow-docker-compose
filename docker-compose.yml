@@ -71,4 +71,23 @@ services:
     depends_on:
       - postgres-airflow
       - postgres-dbt
+  #System: PostgreSQL
+  #Server: postgres-dbt
+  #Username: dbtuser
+  #Password: pssd
+  #Database: dbtdb
 
+  pgadmin:
+    container_name: pgadmin_container    
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root    
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    # volumes:
+    #   - pgadmin:/root/.pgadmin
+    depends_on:
+      - postgres-airflow
+      - postgres-dbt
